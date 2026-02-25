@@ -1,0 +1,163 @@
+ <html>
+<head>
+<style>
+.calculator {
+  width: 200px;
+  margin: 50px auto;
+  border-radius: 8px;
+  border-color:red;
+  overflow: hidden;
+  box-shadow: 0px 10px 15px rgba(0,0,0,0.1);
+  font-family: sans-serif;
+}
+
+#display {
+  background: white	;
+  color: black;
+  font-size: 2rem;
+  text-align: right;
+  padding: 20px;
+}
+.button1{
+background-color:orange;
+color:black;
+}
+.button2{
+background-color:white;
+color:black;
+padding:20px;
+}
+.button3{
+background-color:green;
+color:black;
+	padding:20px;
+}
+.button4{
+
+color:black;
+padding:20px;
+}
+
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); 
+  gap: 1px;
+  background-color:white;
+}
+
+
+.button {
+  padding: 20px;
+  border: none;
+  background: white;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.button:hover { 
+  background: red; 
+}
+
+. button operator { 
+     background: #f9f9f9; color: black; font-weight: bold; 
+}
+
+.equals { 
+  background: red; 
+  color: white; 
+  grid-row: span 2; 
+}
+
+.clear { 
+color: red;
+ }
+.del{
+display: grid;
+  grid-template-columns: repeat(4, 1fr); 
+  gap: .5px;
+  background-color:white;
+color:black;
+}
+
+body{
+background-color:black;
+}
+h1{
+background-color:red;
+color:black;
+}
+</style>
+</head>
+<body>
+
+
+<div class="calculator">
+<h1>Calculator</h1>
+  <div id="display">0</div><hr>
+  <div class="buttons">
+    <button class="button clear">C</button>
+    <button class="button operator">/</button>
+    <button class="button operator">*</button>
+    <button class="button operator">-</button>
+    
+    <button class="button1">7</button>
+    <button class="button1">8</button>
+    <button class="button1">9</button>
+    <button class="button operator">+</button>
+    
+    <button class="button2">4</button>
+    <button class="button2">5</button>
+    <button class="button2">6</button>
+    <button class="button equals">=</button>
+    
+    <button class="button3">1</button>
+    <button class="button3">2</button>
+    <button class="button3">3</button>
+    <button class="button4">0</button>
+<button class="button del">D</button>
+    
+  </div>
+</div>
+<script>
+const display = document.getElementById('display');
+const buttons = document.querySelectorAll('.buttons button');
+
+buttons.forEach(button => {
+  button.addEventListener('click', () => {
+    const value = button.innerText;
+
+    if (value === 'C') {
+      display.innerText = '0';
+    } 
+    else if (value === 'D') {
+      if (display.innerText.length > 1 && display.innerText !== "Error") {
+        // Remove the very last character
+        display.innerText = display.innerText.slice(0, -1);
+      } else {
+        // If it's the last number, reset to 0
+        display.innerText = '0';
+      }
+    }
+
+    else if (value === '=') {
+      try {
+        display.innerText = eval(display.innerText);
+      } catch {
+        display.innerText = "Error";
+      }
+    } 
+
+    else {
+      if (display.innerText === '0' || display.innerText === "Error") {
+        display.innerText = value;
+      } else {
+        display.innerText += value;
+      }
+    }
+  });
+});
+</script>
+
+</body>
+</html>
